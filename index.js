@@ -59,10 +59,10 @@ function displayTodos() {
   todoList.forEach((item) => {
     const listElement = document.createElement("li");
     const delBtn = document.createElement("i");
-
+    
     listElement.innerHTML = item.todoText;
     listElement.setAttribute("data-id", item.id);
-
+    
     delBtn.setAttribute("data-id", item.id);
     delBtn.classList.add("far");
     delBtn.classList.add("fa-trash-alt");
@@ -70,6 +70,7 @@ function displayTodos() {
 
     if (item.isDone) {
       listElement.classList.add("checked");
+      localStorage.setItem("todoList", JSON.stringify(todoList)); //store colors
     }
 
     listElement.addEventListener("click", function (e) {
@@ -85,4 +86,9 @@ function displayTodos() {
     todoListElement.appendChild(listElement);
     listElement.appendChild(delBtn);
   });
+}
+
+
+function take_from_storage(){
+  var storedColors = JSON.parse(localStorage.getItem("todoList")); //get them back
 }
