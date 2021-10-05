@@ -1,23 +1,67 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="icon" href="imgs/favicon.svg" />
     <link rel="stylesheet" href="style.css" />
-    <link rel="shortcut icon" href="icon.svg" type="image/x-icon" />
-    <script
-      src="https://kit.fontawesome.com/29ee0bc57e.js"
-      crossorigin="anonymous"
-    ></script>
-    <title>TODO List</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <title>TODOs List</title>
   </head>
-  <body onload="take_from_storage()">
-    <header>
-      <input type="text" id="myInput" placeholder="Things to be done..." />
-      <span class="addBtn" id="add_button">Add</span>
-    </header>
-    <h2>TODO's</h2>
-    <ul id="myUL"></ul>
+
+  <body>
+    <h1 id="heading">TODOs List</h1>
+
+    <div class="form-group">
+      <input type="text" class="form" id="title" placeholder="Title" />
+    </div>
+    <div class="form-group">
+      <textarea
+        class="form"
+        id="description"
+        placeholder="Description"
+      ></textarea>
+    </div>
+
+    <button id="add" class="btn">Add to list</button>
+    <button id="clear" class="btn" onclick="clearStorage()">Clear List</button>
+
+    <div id="items">
+      <h2>Your Items</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">SNo</th>
+            <th scope="col">Item Title</th>
+            <th scope="col">Item Description</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+          <tr>
+            <th scope="row">1</th>
+            <td>Title</td>
+            <td>Add An Item</td>
+            <td>
+              <button class="btn-del">
+                <img src="/imgs/del.png" alt="delete" srcset="" />
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
     <script src="index.js"></script>
   </body>
 </html>
