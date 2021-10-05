@@ -1,94 +1,58 @@
-// TO-DO !
-
-const todoList = [];
-
-const todoListElement = document.querySelector("#myUL");
-
-document.querySelector("#add_button").addEventListener("click", addTodo);
-document.querySelector("#myInput").addEventListener("keydown", function(e) {
-  if (e.keyCode == 13) {
-    addTodo()
-  }
-});
-
-//-------GETTING VALUES FROM INPUT TO ARRAY OF OBJECTS-------
-function addTodo() {
-  const todoText = document.querySelector("#myInput").value;
-
-  if (todoText == "") {
-    alert("You did not enter any item");
+function getAndUpdate() {
+  console.log("Updating List...");
+  tit = document.getElementById("title").value;
+  desc = document.getElementById("description").value;
+  if (localStorage.getItem("itemsJson") == null) {
+    itemJsonArray = [];
+    itemJsonArray.push([tit, desc]);
+    localStorage.setItem("itemsJson", JSON.stringify(itemJsonArray));
   } else {
-    const todoObject = {
-      id: todoList.length,
-      todoText: todoText,
-      isDone: false,
-    };
-
-    //---WITH UNSHIFT WE ADD THE NEW ELEMENT TO THE BEGINNING OF THE ARRAY
-    //--SO THAT THE NEW ITEMS SHOW UP ON TOP
-    todoList.unshift(todoObject);
-    displayTodos();
+    itemJsonArrayStr = localStorage.getItem("itemsJson");
+    itemJsonArray = JSON.parse(itemJsonArrayStr);
+    itemJsonArray.push([tit, desc]);
+    localStorage.setItem("itemsJson", JSON.stringify(itemJsonArray));
   }
+  update();
 }
 
-//------CHANGING THE isDone VALUE TO TRUE WHEN THE ELEMENT IS CLICKED
-//------OR TO FALSE IF IT WAS TRUE BEFORE
-function doneTodo(todoId) {
-  const selectedTodoIndex = todoList.findIndex((item) => item.id == todoId);
-
-  todoList[selectedTodoIndex].isDone
-    ? (todoList[selectedTodoIndex].isDone = false)
-    : (todoList[selectedTodoIndex].isDone = true);
-  displayTodos();
-}
-
-//----TO DELETE AN ITEM; FROM THE LIST
-function deleteItem(x) {
-  todoList.splice(
-    todoList.findIndex((item) => item.id == x),
-    1
-  );
-  displayTodos();
-}
-
-//---------DISPLAYING THE ENTERED ITEMS ON THE SCREEN------
-function displayTodos() {
-  todoListElement.innerHTML = "";
-  document.querySelector("#myInput").value = "";
-
-  todoList.forEach((item) => {
-    const listElement = document.createElement("li");
-    const delBtn = document.createElement("i");
-    
-    listElement.innerHTML = item.todoText;
-    listElement.setAttribute("data-id", item.id);
-    
-    delBtn.setAttribute("data-id", item.id);
-    delBtn.classList.add("far");
-    delBtn.classList.add("fa-trash-alt");
-    delBtn.setAttribute("data-id", item.id);
-
-    if (item.isDone) {
-      listElement.classList.add("checked");
-      localStorage.setItem("todoList", JSON.stringify(todoList)); //store colors
-    }
-
-    listElement.addEventListener("click", function (e) {
-      const selectedId = e.target.getAttribute("data-id");
-      doneTodo(selectedId);
-    });
-
-    delBtn.addEventListener("click", function (e) {
-      const delId = e.target.getAttribute("data-id");
-      deleteItem(delId);
-    });
-
-    todoListElement.appendChild(listElement);
-    listElement.appendChild(delBtn);
+function update() {
+  if (localStorage.getItem("itemsJson") == null) {
+    itemJsonArray = [];
+    localStorage.setItem("itemsJson", JSON.stringify(itemJsonArray));
+  } else {
+    itemJsonArrayStr = localStorage.getItem("itemsJson");
+    itemJsonArray = JSON.parse(itemJsonArrayStr);
+  }
+  // Populate the table
+  let tableBody = document.getElementById("tableBody");
+  let str = "";
+  itemJsonArray.forEach((element, index) => {
+    str += `
+                    <tr>
+                    <th scope="row">${index + 1}</th>
+                    <td>${element[0]}</td>
+                    <td>${element[1]}</td> 
+                    <td><button class="btn-del " ><img src="delete.png" alt="delete" onclick="deleted(${index})"></button></td>
+                    </tr>`;
   });
+  tableBody.innerHTML = str;
 }
-
-
-function take_from_storage(){
-  var storedColors = JSON.parse(localStorage.getItem("todoList")); //get them back
+add = document.getElementById("add");
+add.addEventListener("click", getAndUpdate);
+update();
+function deleted(itemIndex) {
+  console.log("Delete", itemIndex);
+  itemJsonArrayStr = localStorage.getItem("itemsJson");
+  itemJsonArray = JSON.parse(itemJsonArrayStr);
+  // Delete itemIndex element from the array
+  itemJsonArray.splice(itemIndex, 1);
+  localStorage.setItem("itemsJson", JSON.stringify(itemJsonArray));
+  update();
+}
+function clearStorage() {
+  if (confirm("Do you really want to clear?")) {
+    console.log("Clearing the storage");
+    localStorage.clear();
+    update();
+  }
 }
