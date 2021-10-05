@@ -1,15 +1,15 @@
 function getAndUpdate() {
   console.log("Updating List...");
-  tit = document.getElementById("title").value;
+  title = document.getElementById("title").value;
   desc = document.getElementById("description").value;
   if (localStorage.getItem("itemsJson") == null) {
     itemJsonArray = [];
-    itemJsonArray.push([tit, desc]);
+    itemJsonArray.push([title, desc]);
     localStorage.setItem("itemsJson", JSON.stringify(itemJsonArray));
   } else {
     itemJsonArrayStr = localStorage.getItem("itemsJson");
     itemJsonArray = JSON.parse(itemJsonArrayStr);
-    itemJsonArray.push([tit, desc]);
+    itemJsonArray.push([title, desc]);
     localStorage.setItem("itemsJson", JSON.stringify(itemJsonArray));
   }
   update();
@@ -23,6 +23,7 @@ function update() {
     itemJsonArrayStr = localStorage.getItem("itemsJson");
     itemJsonArray = JSON.parse(itemJsonArrayStr);
   }
+
   // Populate the table
   let tableBody = document.getElementById("tableBody");
   let str = "";
@@ -32,7 +33,7 @@ function update() {
                     <th scope="row">${index + 1}</th>
                     <td>${element[0]}</td>
                     <td>${element[1]}</td> 
-                    <td><button class="btn-del " ><img img src="/imgs/delete.png" alt="delete" onclick="deleted(${index})"></button></td>
+                    <td><button class="btn-del " ><img src="/imgs/delete.png" alt="delete" onclick="deleted(${index})"></button></td>
                     </tr>`;
   });
   tableBody.innerHTML = str;
@@ -51,7 +52,6 @@ function deleted(itemIndex) {
 }
 function clearStorage() {
   if (confirm("Do you really want to clear?")) {
-    console.log("Clearing the storage");
     localStorage.clear();
     update();
   }
