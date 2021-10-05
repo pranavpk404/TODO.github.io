@@ -32,7 +32,7 @@ function update() {
                     <th scope="row">${index + 1}</th>
                     <td>${element[0]}</td>
                     <td>${element[1]}</td> 
-                    <td><button class="btn-del " ><img src="delete.png" alt="delete" onclick="deleted(${index})"></button></td>
+                    <td><button class="btn-del " ><img img src="/imgs/delete.png" alt="delete" onclick="deleted(${index})"></button></td>
                     </tr>`;
   });
   tableBody.innerHTML = str;
