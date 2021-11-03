@@ -1,4 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+:root {
+  --btn-bg-color: #e96c05;
+  --color: rgb(0, 0, 0);
+}
 * {
   margin: 0;
   padding: 0;
@@ -6,32 +10,34 @@
   font-family: "Poppins", sans-serif;
 }
 ::selection {
-  color: #ffff;
-  background: rgb(156, 255, 28);
+  color: var(--color);
+  background: rgb(0, 0, 0);
+}
+html {
+  background: black;
 }
 body {
+  color: var(--color);
   width: 100%;
   height: 100vh;
-
   padding: 10px;
-  background: linear-gradient(50deg, #e96c05 0%, #05ec05 100%);
+  background: linear-gradient(50deg, #000046 0%, #1cb5e0 100%);
 }
-.wrapper {
-  background: #fff;
+.container {
   max-width: 400px;
   width: 100%;
   margin: 120px auto;
   padding: 25px;
   border-radius: 5px;
-  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 1px 0px 15px 20px rgb(0 0 0 / 10%);
 }
-.wrapper header {
+
+.container header {
   font-size: 30px;
   font-weight: 600;
 }
-.wrapper .inputField {
+.container .inputField {
   margin: 20px 0;
-  width: 100%;
   display: flex;
   height: 45px;
 }
@@ -46,17 +52,17 @@ body {
   transition: all 0.3s ease;
 }
 .inputField input:focus {
-  border-color: #8e49e8;
+  border-color: var(--btn-bg-color);
 }
 .inputField button {
   width: 50px;
   height: 100%;
   border: none;
-  color: #fff;
+  color: var(--color);
   margin-left: 5px;
   font-size: 21px;
   outline: none;
-  background: #8e49e8;
+  background: var(--btn-bg-color);
   cursor: pointer;
   border-radius: 3px;
   opacity: 0.6;
@@ -65,13 +71,13 @@ body {
 }
 .inputField button:hover,
 .footer button:hover {
-  background: #721ce3;
+  background: var(--btn-bg-color);
 }
 .inputField button.active {
   opacity: 1;
   pointer-events: auto;
 }
-.wrapper .todoList {
+.container .todoList {
   max-height: 250px;
   overflow-y: auto;
 }
@@ -103,7 +109,7 @@ body {
 .todoList li:hover .icon {
   right: 0px;
 }
-.wrapper .footer {
+.container .footer {
   display: flex;
   width: 100%;
   margin-top: 20px;
@@ -119,7 +125,7 @@ body {
   font-weight: 400;
   font-size: 16px;
   margin-left: 5px;
-  background: #8e49e8;
+  background: var(--btn-bg-color);
   cursor: pointer;
   user-select: none;
   opacity: 0.6;
@@ -129,4 +135,8 @@ body {
 .footer button.active {
   opacity: 1;
   pointer-events: auto;
+}
+
+.footer span {
+  font-weight: bold;
 }
