@@ -1,4 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
 :root {
   --btn-bg-color: #e96c05;
   --color: rgb(0, 0, 0);
@@ -21,7 +20,7 @@ body {
   width: 100%;
   height: 100vh;
   padding: 10px;
-  background: linear-gradient(50deg, #000046 0%, #1cb5e0 100%);
+  background: linear-gradient(50deg, #c04848 0%, #480048 100%);
 }
 .container {
   max-width: 400px;
